@@ -72,8 +72,6 @@ public class WifiApConfigStoreTest {
     private static final String TEST_APCONFIG_CHANGE_NOTIFICATION_SUMMARY = "Notification summary";
     private static final String TEST_APCONFIG_CHANGE_NOTIFICATION_DETAILED =
             "Notification detailed";
-    private static final int RAND_SSID_INT_MIN = 1000;
-    private static final int RAND_SSID_INT_MAX = 9999;
     private static final String TEST_CHAR_SET_AS_STRING = "abcdefghijklmnopqrstuvwxyz0123456789";
     private static final String TEST_STRING_UTF8_WITH_30_BYTES = "智者務其實愚者爭虛名";
     private static final String TEST_STRING_UTF8_WITH_32_BYTES = "ΣωκράτηςΣωκράτης";
@@ -193,14 +191,8 @@ public class WifiApConfigStoreTest {
         assertTrue(config.allowedKeyManagement.get(KeyMgmt.WPA2_PSK));
     }
 
-    private void verifyDefaultLocalOnlyApConfig(WifiConfiguration config, String expectedSsid,
-            int expectedApBand) {
-        String[] splitSsid = config.SSID.split("_");
-        assertEquals(2, splitSsid.length);
-        assertEquals(expectedSsid, splitSsid[0]);
-        assertEquals(expectedApBand, config.apBand);
-        int randomPortion = Integer.parseInt(splitSsid[1]);
-        assertTrue(randomPortion >= RAND_SSID_INT_MIN && randomPortion <= RAND_SSID_INT_MAX);
+    private void verifyDefaultApConfig(WifiConfiguration config) {
+        assertEquals(TEST_DEFAULT_AP_SSID, config.SSID);
         assertTrue(config.allowedKeyManagement.get(KeyMgmt.WPA2_PSK));
     }
 
